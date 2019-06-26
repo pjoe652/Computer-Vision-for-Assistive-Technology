@@ -66,7 +66,7 @@ class DetectorAPI:
         self.default_graph.close()
 
 if __name__ == "__main__":
-    model_path = 'B:/Users/PJoe9/Desktop/tensorflow/faster_rcnn_inception_v2_coco_2018_01_28/frozen_inference_graph.pb'
+    model_path = 'B:/Users/PJoe9/Desktop/Computer-Vision-for-Assistive-Technology/faster_rcnn_inception_v2_coco_2018_01_28/frozen_inference_graph.pb'
     odapi = DetectorAPI(path_to_ckpt=model_path)
     threshold = 0.7
 
@@ -100,6 +100,7 @@ if __name__ == "__main__":
         boxes, scores, classes, num = odapi.processFrame(img)
 
         # Visualization of the results of a detection.
+        body_found = False
 
         for i in range(len(boxes)):
             # Class 1 represents human
@@ -107,16 +108,19 @@ if __name__ == "__main__":
                 box = boxes[i]
                 cv2.rectangle(img,(box[1],box[0]),(box[3],box[2]),(255,0,0),2)
                 crop_img = img[box[0]:box[2],box[1]:box[3]]
+                body_found = True
                 break
 
     #     # crop_img = img[box[0]:box[2],box[1]:box[3]]
     #     # print(box[1],box[0],box[3],box[2])
     #     cv2.rectangle(img,(box[1],box[0]),(box[3],box[2]),(255,0,0),2)
+        if(body_found):
+            predictions, probabilities = prediction.predictImage(crop_img, result_count=3, input_type="array")
 
-        predictions, probabilities = prediction.predictImage(crop_img, result_count=3, input_type="array")
-
-        for eachPrediction, eachProbability in zip(predictions, probabilities):
-            print(eachPrediction , " : " , eachProbability)
+            for eachPrediction, eachProbability in zip(predictions, probabilities):
+                print(eachPrediction , " : " , eachProbability)
+        else:
+            print("No body found")
 
         print("------------------------------")
         print("------------------------------")
