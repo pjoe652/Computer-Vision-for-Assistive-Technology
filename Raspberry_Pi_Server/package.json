@@ -1,0 +1,29 @@
+{
+  "name": "cameracapture",
+  "version": "1.0.0",
+  "description": "",
+  "main": "camera.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node camera.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ahdin": "^1.1.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "exit": "^0.1.2",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "image-convert": "^0.1.33",
+    "imagemin": "^7.0.0",
+    "jimp": "^0.8.3",
+    "js-base64": "^2.5.1",
+    "ngrok": "^3.2.5",
+    "node-fetch": "^2.6.0",
+    "node-webcam": "^0.5.0",
+    "text-encoding-utf-8": "^1.0.2",
+    "utf8": "^3.0.0"
+  }
+}
